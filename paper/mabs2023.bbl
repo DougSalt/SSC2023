@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{ayllon2021keeping}
+Ayll{\'o}n, D., Railsback, S.F., Gallagher, C., Augusiak, J., Baveco, H.,
+  Berger, U., Charles, S., Martin, R., Focks, A., Galic, N., et~al.: Keeping
+  modelling notebooks with trace: Good for you and good for environmental
+  research and management support. Environmental Modelling \& Software
+  \textbf{136},  104932 (2021)
+
+\bibitem{edmonds2003replication}
+Edmonds, B., Hales, D.: Replication, replication and replication: Some hard
+  lessons from model alignment. Journal of Artificial Societies and Social
+  Simulation  \textbf{6}(4) (2003)
+
+\bibitem{polhill2017lessons}
+Polhill, G., Milazzo, L., Dawson, T., Gimona, A., Parker, D.: Lessons learned
+  replicating the analysis of outputs from a social simulation of biodiversity
+  incentivisation. In: Advances in Social Simulation 2015, pp. 355--365.
+  Springer (2017)
+
+\bibitem{schmolke2010ecological}
+Schmolke, A., Thorbek, P., DeAngelis, D.L., Grimm, V.: Ecological models
+  supporting environmental decision making: a strategy for the future. Trends
+  in ecology \& evolution  \textbf{25}(8),  479--486 (2010)
+
+\end{thebibliography}
