@@ -49,7 +49,7 @@ The abstract should briefly summarize the contents of the paper in
 Replication of social simulation results has been highlighted as a significant
 issue for the ABM for a number of years (e.g.  \cite{edmonds2003replication}),
 and in particular the paper that forms the basis of this work
-\cite{polhill2017lessons}.  The focus of replication work has previous just
+\cite{polhill2017lessons}.  The focus of replication work has previously just
 been on the model itself, but as was shown in ibid, the analysis of the
 outputs of the model can potentially be just as complex, and no less difficult
 to replicate unless adequate records are kept. Indeed there as an additional
@@ -59,7 +59,7 @@ The TRACE protocol \cite{schmolke2010ecological,ayllon2021keeping} provides
 some guidance highlighting the need to keep a notebook of the analysis done and
 a standardised approach to making that notebook; however, the lessons learned
 from the replication exercise in \cite{polhill2017lessons} show that more
-detailed guidance on the information that should be recorded.  and on tools
+detailed guidance on the information that should be recorded,  and on tools
 that could be used to support the process. Ideally the aim should be to
 completely automate the process, record accurately sources of data used,
 version check applications used essentially providing a complete graph from
@@ -68,50 +68,63 @@ data to result.
 The output analysis replication in this paper concerns earlier work with
 FEARLUS-SPOMM, which is a coupled agent-based model of agricultural decision-
 making and species stochastic patch occupancy metacommunity model that has been
-used to explore incentivisation strategies to improve biodiversity (Polhill et
-al. 2013; Gimona and Polhill 2011). Belonging to the ‘typification’ class of
-social simulations adfa, p. 1, 2011.  © Springer-Verlag Berlin Heidelberg 2011
-(“theoretical constructs intended to investigate some properties that apply to
-a wide range of empirical phenomena that share some common features” – Boero
-and Squaz- zoni, 2005). This work involved the analysis of the outputs from
-around 20,000 runs of the model using a number of techniques aimed at
-demonstrating nonlinearities in the relationship between incentivisation and
-biodiversity outcome.  Recording workflow data on the process used to create
-analysis can be challenging, and currently there are no codified standards as
-to how this should be done for ABMs. For FEARLUS-SPOMM, the methods used drew
-heavily on statistical techniques available as R packages that are as part of
-core R functionality. Although R allows transcripts of interactive terminal
-sessions to be saved, the work involved great deal of exploration of different
-ways of attempting to visualise and analyse the nonlineari- ties in the model
-results, not all of which were likely to be reported in the paper. Such logs
-are therefore not the best way to record the means by which the outputs were
-analysed, and hence the strategy used was to save each analysis or
-visualisation in a(n R) script. Since the output from the (Swarm) software that
-generated the output data being analysed used a mixture of text formats, some
-Perl scripts were also written to process that output into a CSV file for easy
-import into R. When the MIRACLE pro- ject (Parker et al. 2015) provided a
-context in which the replication of that analysis was necessary, an opportunity
-was created to test the viability of the above strategy.
+used to explore incentivisation strategies to improve biodiversity
+\cite{polhill_nonlinearities_2013}, \cite{gimona2011exploring}. Belonging to the
+‘typification’ class of social simulations  \cite{boero2005does}.  This work
+involved the analysis of the outputs of approximately 20,000 runs of the model
+using a number of techniques aimed at demonstrating nonlinearities in the
+relationship between incentivisation and biodiversity outcome.  Recording
+workflow data on the process used to create analysis can be challenging, and
+currently there are no codified standards as to how this should be done for
+ABMs. For FEARLUS-SPOMM, the methods used drew heavily on statistical
+techniques available as R packages that are as part of core R functionality.
+Although R allows transcripts of interactive terminal sessions to be saved, the
+work involved great deal of exploration of different ways of attempting to
+visualise and analyse the nonlinearities in the model results, not all of
+which were likely to be reported in the paper. Such logs are therefore not the
+best way to record the means by which the outputs were analysed, and hence the
+strategy used was to save each analysis or visualisation in a(n R) script.
+Since the output from the (Swarm) software that generated the output data being
+analysed used a mixture of text formats, some Perl scripts were also written to
+process that output into a CSV file for easy import into R. When the MIRACLE pr
+ject \cite{parker2019final} provided a context in which the replication of that
+analysis was necessary, an opportunity was created to test the viability of the
+above strategy.
 
 In the rest of this paper, we describe  a tool for automatically recording
 metadata, which can be incorporated into the analysis replication process, and
-how this  was used to regenerate some of the figures in Polhill et al. (2013)
-and we test a tool to support keeping the records needed to per- form
-replication more easily, before making some recommendations in concluding
-remarks.
+how this  was used to regenerate some of the figures in
+\cite{polhill_nonlinearities_2013} and we test a tool to support keeping the
+records needed to per- form replication more easily, before making some
+recommendations in concluding remarks.
 
 \section{Method}
 
+One of the artefacts of the MIRACLE project \cite{parker2019final} was the
+Social Simulation REplication Interface or SSREPI. This is the schema shown in
+\ref{fig:schema}.  This schema has evolved since it original conception.  The
+newest version of this document may be found here \cite{polhill2022miracle}. This is a database
+schema derived from the Dublin Core \cite{weibel2000dublin}, the standard XML
+datatypes \cite{biron2004xml} and the PROV-O ontologies \cite{missier2013w3c}.
+The schema is designed with agnosticisim towards the underlying database
+technology and as such has been implmented both in PostgresSQL
+\cite{stonebraker1991postgres} and Sqlite3 \cite{sqliteorg2023syntax}.
 
-ne of the aims was to leave as much of the code as unchanged as possible (this differs in approach to FAIR-CLI. develop this, both here and in the discussion.
+One of the aims was to leave as much of the code, i.e. the original experiment
+as unchanged as possible. That is we wanted to change the framework code rather
+than the core code. The core code in the example above being the executable,
+precompiled in Objective-C \cite{objectivec}. Additionally the support code, i.e. the
+code that prepared the data, a Perl \cite{perl563} script and the code that did the
+post analysis, a mixture of Perl and R \cite{R422}.  This meant we developed the
+database access in Python \cite{python368}, wrote wrapper scripts in Bash \cite{bash4420}. This
+differs in approach to FAIR data piperline \cite{mitchell2022fair} in which the provenance framework is
+embedded in the code that constitutes the body of the experiment as it were.
 
-One of the artefacts of the MIRACLE project \cite{} was the Social Simulation REplication Interface or SSREPI. This is the schema shown 
-in \ref{fig:schema}. This schema has evolved since it original conception.
-The newest version of this document may be found here \cite{}. This is a
-database schema derived from the Dublin Core \cite{weibel2000dublin}, the
-standard XML datatypes \cite{biron2004xml} and the PROV-O ontologies \cite{missier2013w3c}. The schema is designed with
-agnosticisim towards the underlying database technology and as such has
-been implmented both in PostgresSQL \cite{stonebraker1991postgres} and Sqlite3 \cite{sqliteorg2023syntax}.
+With the tool in the current state this involved labouriously going through the
+code and inserting the some of the following Bash-based commands, shown in
+table \ref{tab:commands}. These commands have a fairly complex parameter set as
+it stands, and no way of checking whether the code worked other than running
+it, and this led to one of the immediate problems with this method.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{img/schema.jpeg}
@@ -140,15 +153,15 @@ summarised in \ref{fig:finegrain} .
 
 For the purposes of this short paper we are concentrating on a
 demonstration of recording provenance. Indeed we use the example,
-mentioned in the introduction of \cite{}, and modified the original Bash \cite{} scripts to include the what we denote as \textit{primitives} . So an example of the code 
+mentioned in the introduction of \cite{polhill2022miracle}, and modified the original Bash \cite{bash4420} scripts to include the what we denote as \textit{primitives} . So an example of the code 
 
 In order to record provenance we 
 We coded the following primitives from
-the SSREPI interface definition \cite{}. These are implemented in a mixture of Python \cite{} and Bash \cite{}
+the SSREPI interface definition \cite{polhill2022miracle}. These are implemented in a mixture of Python and Bash.
 
 \begin{table}
 \caption{Table captions should be placed above the
-tables.}\label{tab1}
+tables.}\label{tab:commands}
     \begin{tabularx}{\textwidth}{|l|p{2cm}|p{6cm}|}
 \hline
 Primitive & Type & Purpose \\
@@ -205,24 +218,36 @@ Elaboration of all this may be found in the man pages and design documents in th
 
 \section{Results}
 
+As mentioned the method undertaken in this paper involved inserting the correct
+Bash-based commands, listed in table \ref{tab:commands}. These commands
+have a fairly complex parameter set as it stands, and no way of checking
+whether the code worked other than running it, and this led to one of the
+immediate problems with this method. The only way to see if the code was
+working was to run it, a suck it and see methodology. This was extremely time consuming. We took the obvious approach and ran small subsets of
+the ~20,000 runs or so, to see if we could get the framework to work and then scaled it up to the full run, but invariably we ran into new problems the greater the scale. It therefore took a substantial time to even get this first replication to run. It took several months of coding effort to get this correct. 
+
 Obviously with complicated diagrams result from the 20,000 runs. The challenge becomes how to visualise these.
 There are several graphs produced so far, these being 
 
 We show the workflow graph in fig. \ref{fig:workflow} and a section of the
 proveance graph in fig. \ref{fig:sub-provenance}
 
+So what use is this provenence meta data? Beyond replicability
+
 \begin{figure}
 \includegraphics[width=\textwidth]{img/subsection-of-provenance.png}
 \caption{A small sub-section of the proevenance graph} \label{fig:sub-provenance}
 \end{figure}
 
+Those with a sharp eye may have noticed the versions of Perl, Python and R were not around when the original experiments were run and obviously this has implications.
 
 \section{Discussion}
 
-What we have learnt from this 
-This is a lot of pfaff. and is still not oven ready
+What we have learnt from this?  As noted the process of running the experiment with the new provenance and metadata commands was a complete pfaff. It involved the repeated running of the experiment with a larger and larger array of inputs until we matched the size of the original experiment.  There were codes in the both the Python and bash code (calling the Python scripts)
 
-So what use is this provenence meta data. Tracing bad data. 
+
+This has taken me almost a year to get it running. Repeating an experiment in a completely automated fashion turns out tbe a really hard task. The plan is to adapt this provenance framework to other model running language frameworks, in particular R and Python.
+
 
 We demonstrate this by tracing a series of bad data across the diagrams.
 
@@ -235,6 +260,8 @@ Additionally we want to produce modules in other languages as well, such as R, p
 
 One of the nice things was that I was able to parallelise the post processing job simply.
 
+The underlying database is probably wrong. We should be using a graphing language such as Gremlin 
+
 %
 % ---- Bibliography ----
 %
@@ -242,6 +269,7 @@ One of the nice things was that I was able to parallelise the post processing jo
 % References will then be sorted and formatted in the correct style.
 %
 \bibliographystyle{splncs04}
-\bibliography[keyword={github.com/DougSalt/MABS2023}]{global.bib}
+\bibliography{global.bib}
+% \bibliography[keyword={github.com/DougSalt/SSC2023}]{global.bib}
 %
 \end{document}
