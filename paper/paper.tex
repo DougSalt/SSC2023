@@ -22,22 +22,30 @@
 
 \begin{document}
 %
-\title{Towards automated provenance collection for experimental runs of agent-based models\thanks{Supported by The Scottish Government}}
+\title{Towards automated provenance collection for experimental runs of agent-based models\thanks{This work was supported by the Scottish Government Rural and Environment Science and Analytical Services Division (project reference JHI-C5-1)}}
+%%% GP: if you ever want the standard acknowledgement text for C5, it's on our
+%%% GP: project webpage at https://large-scale-modelling.hutton.ac.uk/
 %
 \titlerunning{An automated provenance collection framework}
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\author{Doug Salt\inst{1}\orcidID{0000-1111-2222-3333} \and
-Gary Polhill\inst{2,3}\orcidID{1111-2222-3333-4444} }
+\author{Doug Salt\inst{1}\orcidID{0000-0001-5186-9388} \and
+Gary Polhill\inst{1}\orcidID{0000-0002-8596-0590} }
+
+%%% GP: to discuss -- which other authors should we include here?
+%%% GP: Kit Macleod? (Has he had intellectual input into this via WP1?)
+%%% GP: Coran Musk? (Random acknowledgement for looking after the machines)
+%%% GP: Lorenzo Milazzo? (As the original SSREPI developer)
+%%% GP: Dawn Parker? (As MIRACLE PI -- do we see this as a MIRACLE paper?)
 %
-\authorrunning{Salt et al.}
+\authorrunning{D. Salt et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{The James Hutton Institute, Craigiebuckler Aberdeen AB15 8QH Scotland
-\email{doug.salt@hutton.ac.uk}\\
-\url{http://hutton.ac.uk}
+\institute{The James Hutton Institute, Craigiebuckler, Aberdeen, AB15 8QH, Scotland
+\email{\{doug.salt,gary.polhill\}@hutton.ac.uk}\\
+\url{https://www.hutton.ac.uk/}
 }
 %
 \maketitle              % typeset the header of the contribution
@@ -58,72 +66,57 @@ Gary Polhill\inst{2,3}\orcidID{1111-2222-3333-4444} }
 \section{Introduction}
 
 Replication of social simulation results has been highlighted as a significant
-issue for the ABM for a number of years (e.g.  \cite{edmonds2003replication}),
-and in particular the paper that forms the basis of this work
-\cite{polhill2017lessons}.  The focus of replication work has previously just
-been on the model itself, but as was shown in ibid, the analysis of the
-outputs of the model can potentially be just as complex, and no less difficult
-to replicate unless adequate records are kept. Indeed there as an additional
-attempt to reproduce the results and even with the lessons learnt from ibid, it
-still took months to recreate the final diagrams that were submitted to paper.
-The TRACE protocol \cite{schmolke2010ecological,ayllon2021keeping} provides
+issue for the agent-based modelling (ABM) community for a number of years (e.g. \cite{edmonds2003replication}).
+The paper that forms the basis of this work (\cite{polhill2017lessons}) shows that
+the analysis of the outputs of the model can potentially be just as complex a
+process as developing and running the model itself. Analysis of outputs is no less difficult
+to replicate unless adequate records are kept. The TRACE protocol \cite{schmolke2010ecological,ayllon2021keeping} provides
 some guidance highlighting the need to keep a notebook of the analysis done and
-a standardised approach to making that notebook. There are also appear to be
-many scientific workflow tools, examples being, Snakemake
+a standardised approach to making that notebook. There are also 
+many scientific workflow tools, such as Snakemake
 \cite{koster2012snakemake}, NextFlow \cite{di2017nextflow}, Kepler
-\cite{ludascher2006scientific}, Taverna \cite{hull2006taverna} just to name a
-few. However these are workflow tools, the concentrate on automation and
-repeatability, and if they do record provenance, then it is an after thought.
-It appears that these tools are more centred on automation rather than
-provenance and metadata.
+\cite{ludascher2006scientific} and Taverna \cite{hull2006taverna}. However, since
+these are workflow tools, the focus is on automation and
+repeatability rather than provenance, which, if it is included, is as an afterthought.
 
 One of the lessons learned from the replication exercise in
-\cite{polhill2017lessons} show that, for the purposes of replicability more
-detailed guidance on the information that should be recorded,  and on tools
-that could be used to support the process. Ideally the aim should be to
-completely automate the process, record accurately sources of data used,
-version check applications used essentially providing a complete graph from
-data to result.
+\cite{polhill2017lessons} was that, for the purposes of replication, more
+detailed guidance on the information that should be recorded is needed. Since
+recording such metadata is tedious (and error-prone) for humans, any such
+guidance should be accompanied by specification of tools
+that could be used to support the process. In the ideal world, the process
+of recording provenance metadata would be completely automated, essentially providing a complete graph from data (including their sources) through applications (model, scripts and analysis tools, including versions thereof) to result.
 
 The output analysis replication in this paper concerns earlier work with
-FEARLUS-SPOMM, which is a coupled agent-based model of agricultural decision-
+FEARLUS-SPOMM, which is a coupled ABM of agricultural decision-
 making and species stochastic patch occupancy metacommunity model that has been
 used to explore incentivisation strategies to improve biodiversity
 \cite{polhill_nonlinearities_2013,gimona2011exploring}. Belonging to the
-‘typification’ class of social simulations  \cite{boero2005does}.  This work
+‘typification’ class of social simulations  \cite{boero2005does}, this work
 involved the analysis of the outputs of approximately 20,000 runs of the model
-using a number of techniques aimed at demonstrating non-linearities in the
+using a number of techniques aimed at demonstrating nonlinearities in the
 relationship between incentivisation and biodiversity outcome.  Recording
-workflow data on the process used to create analysis can be challenging, and
+provenance metadata on the process used to analyse and visualise the outputs is challenging, and
 currently there are no codified standards as to how this should be done for
-agent-based models. For FEARLUS-SPOMM, the methods used drew heavily on statistical
-techniques available as R packages that are as part of core R functionality.
+ABMs. For FEARLUS-SPOMM, the analysis and visualisation methods used drew heavily on statistical
+techniques available as R packages.
 Although R allows transcripts of interactive terminal sessions to be saved, the
-work involved great deal of exploration of different ways of attempting to
-visualise and analyse the non-linearities in the model results, not all of
-which were likely to be reported in the paper. Such logs are therefore not the
-best way to record the means by which the outputs were analysed, and hence the
+work involved great deal of exploration of alternative analyses and visualisations, not all of
+which were reported in the manuscript as finally accepted. Such transcripts are therefore not the
+best way to record the means by which a model's outputs were analysed, and hence the
 strategy used was to save each analysis or visualisation in a(n R) script.
-Since the output from the (Swarm) software that generated the output data being
-analysed used a mixture of text formats, some Perl scripts were also written to
-process that output into a CSV file for easy import into R. When the MIRACLE
+Since the output from the (Swarm) model software used a mixture of text formats, some Perl scripts were also written to
+process that output into CSV format for easy import into R. When the MIRACLE
 project \cite{parker2019final} provided a context in which the replication of
 that analysis was necessary, an opportunity was created to test the viability
-of the above strategy.
+of the strategy of relying on scripts to record provenance.
 
-If we make the assumptions that the input data is accurate and relevant; the
-model bug-free and rigorously correct then the manifest problem with
-agent-based modelling is the number of replications required to provide
-adequate probability that an interesting result is not the null hypothesis, and
-just down to a matter of chance. Realistically this involves many, many
-repetitions of the same experiment or small variations on the parameters for a
-given experiment. Similarly infeasible is the manual running of these many
-experiments and thus most resort to some kind of automation. We refer to this
-as the automatic and replicability problem. In  addition to this there is the
-problem of recording which data is being used, which data is being produced,
-how it was gathered or created and how the resultant data was processed. Given
-20,000 experiments the amount of such data is not inconsiderable. Moreover this
-data needs to be in a form that is analysable and visualisable. 
+`Multifinality' (the same initial conditions and parameter settings having qualitatively different results) in ABMs means we need to ensure that
+reported results are not just down to a matter of chance. This is one of many reasons (e.g. in empirical contexts especially, calibration, validation and sensitivity analysis) why experiments with ABMs involve large numbers of runs. The tedium (and in larger-scale cases, infeasibility) of conducting each run by hand means most ABM experiments resort to some kind of automation, including of the kind provided by workflow tools mentioned above, but also using built-in features of ABM software (e.g. in the case of NetLogo, BehaviorSpace). This is fine if all we
+want to do is repeat the same process, but what if we are interested in why a particular instance of that process led to an unexpected outcome? Re-executing the workflow will not necessarily generate \textit{exactly} the same result unless we have a record of everything needed to do that (including seeds for pseudo-random number generators). We refer to this
+as the `automation and replication' problem.  
+
+%%% GP: Got here as at 2023-04-19T10:59.
 
 The first of these two problems, the automation and replicability of
 experiments  may be and as a matter of course and routine is already solved by
@@ -285,7 +278,7 @@ These coordinating commands are:
         if a particular row in a table exists.  \item {\color{green}
             \ttvar{get_value.py}} - gets any specified single value from a
             table given the primary key.  \item {\color{green}
-\ttvar{get_values.py}} \item {\color{green} \ttvar{next_study.py}} \item
+\ttvar{get_values.py}}  - gets one or more rows given the search values. \item {\color{green}\ttvar{next_study.py}} - gets the next available and unique study number. \item
 {\color{green} \ttvar{update.py}} - idempotently updates a particular row in a
 table.  \end{itemize}
 
@@ -300,7 +293,7 @@ expedient on rapid development and may need revisiting. However the schema is
 and its interaction is quite complex and this would involve critical path
 analysis
 
-So each of the Bash commands listed in table \ref{tab:commmands} composes over
+So each of the Bash commands listed in table \ref{tab:commands} composes over
 the above python commands to populate the SSREPI database in a consistent and
 logical manner.
 
