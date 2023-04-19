@@ -488,7 +488,7 @@ relational database which was designed to be and \textit{should} be acyclic).}
 So for an easy to see example we pick the entity {\color{red}\ttvar{Applications.application_3831436655}}, and see how this affects other entities in the graph. This is \ttvar{SSS-StopC2-Cluster-create.pl} and we are using the workflow graph to see what might be affected. And this is shown in \ref{fig:broken-application}. It might be for instance that there is a bug in this program, so we should like to see how the errors might propagate out through the workflow.
 
 \begin{figure} \includegraphics[width=\textwidth]{img/broken-application.pdf}
-\caption{The workflow sub-graph} \label{fig:broken-application} \end{figure}
+\caption{The workflow sub-graph show the propagation of a broken application (in red) to its outputs} \label{fig:broken-application} \end{figure}
 
 That example was somewhat contrived and simplistic and gives a flavour.
 However, what if we wanted to trace a bad data set?  If we ignore for this
@@ -501,7 +501,7 @@ small} section of of the provenance graph showing what is affected in red. This
 is shown in fig. \ref{fig:high-lit-provenance-trace}
 
 \begin{figure} \includegraphics[width=\textwidth]{img/high-lit-provenance-trace.pdf}
-\caption{The workflow sub-graph} \label{fig:high-lit-provenance-trace} \end{figure}
+\caption{A provenance sub-graph showing (in red) the propagation of bad data through the system} \label{fig:high-lit-provenance-trace} \end{figure}
 
 Moreover we can list out the affected entities. In this case, those entities would be:
 
