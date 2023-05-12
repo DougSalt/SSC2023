@@ -1,6 +1,6 @@
 Authors: Doug Salt, Gary Polhill, Ben Mccormick
 
-Title: Four Netlogo extensions: publicly available Netlogo extensions that provide a case-base reasoning framework, table look up with categorical variables, 
+Title: Four Netlogo extensions: publicly available Netlogo extensions that provide a case-base reasoning framework, table look up with categorical variables, precision mathematics and virtual machine inspection 
 
 Abstract: 
 
