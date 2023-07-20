@@ -1,0 +1,11 @@
+digraph {
+	margin=0 ratio=fill
+	"Applications.application_3831436655" [label=<<U>Applications</U><BR/><B>SSS-StopC2-Cluster-create.sh</B><BR/><BR/>created =  2022-12-20<BR/>creator =  someone<BR/>modified =  2022-12-20<BR/>modifier =  someone<BR/>id_application =  application_3831436655<BR/>language =  Bash>]
+	"Pipelines.application_648609270" [label=<<U>Pipelines</U><BR/><B>application_648609270</B><BR/><BR/>created =  2022-12-20<BR/>creator =  someone<BR/>calls_application =  application_648609270<BR/>parent_application =  application_3831436655>]
+	"Pipelines.application_3831436655" [label=<<U>Pipelines</U><BR/><B>application_3831436655</B><BR/><BR/>created =  2022-12-20<BR/>creator =  someone<BR/>modified =  2022-12-20<BR/>modifier =  someone<BR/>calls_application =  application_3831436655<BR/>parent_application =  application_3831436655<BR/>next =  application_648609270>]
+"Applications.application_3831436655" -> "Applications.application_648609270" [label="dependency-to-dependency"]
+	"Pipelines.application_648609270" -> "Applications.application_648609270" [label="calls_application-from-pipeline"]
+	"Pipelines.application_3831436655" -> "Applications.application_3831436655" [label="parent_application-from-pipeline"]
+	"Pipelines.application_648609270" -> "Applications.application_3831436655" [label="parent_application-from-pipeline"]
+	"Pipelines.application_3831436655" -> "Pipelines.application_648609270" [label="next-from-pipeline"]
+}
