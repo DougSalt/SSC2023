@@ -32,11 +32,11 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-% \author{Doug Salt\inst{1}\orcidID{0000-0001-5186-9388} \and
-% Gary Polhill\inst{1}\orcidID{0000-0002-8596-0590} \and
-% Corran Musk\inst{1}\orcidID{0000-0002-8596-0590} \and
-% Lorenzo Milazzo\inst{2}\orcidID{0000-0002-8596-0590} \and
-% Dawn Parker\inst{3}\orcidID{0000-0002-8596-0590} }
+\author{Doug Salt\inst{1} \orcidID{0000-0001-5186-9388} \and
+ Gary Polhill\inst{1} \orcidID{0000-0002-8596-0590} \and
+ Corran Musk\inst{1} \and
+ Lorenzo Milazzo\inst{2} \and
+ Dawn Parker\inst{3} \orcidID{0000-0001-8988-193X}  }
 
 %%% GP: to discuss -- which other authors should we include here?
 %%% GP: Kit Macleod? (Has he had intellectual input into this via WP1?)
@@ -44,14 +44,20 @@
 %%% GP: Lorenzo Milazzo? (As the original SSREPI developer)
 %%% GP: Dawn Parker? (As MIRACLE PI -- do we see this as a MIRACLE paper?)
 %
-%\authorrunning{D. Salt et al.}
+\authorrunning{D. Salt et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-% \institute{The James Hutton Institute, Craigiebuckler, Aberdeen, AB15 8QH, Scotland
-% \email{\{doug.salt,gary.polhill\}@hutton.ac.uk}\\
-%\url{https://www.hutton.ac.uk/}
-%}
+\institute{The James Hutton Institute, Craigiebuckler, Aberdeen, AB15 8QH, Scotland
+\email{\{doug.salt,gary.polhill\}@hutton.ac.uk}\\
+\url{https://www.hutton.ac.uk/}
+\and Satellite and Surface Assimilation (SSA) Group
+Met Office, FitzRoy Road, Exeter, Devon, EX1 3PB, UK
+\email{lorenzo.milazzo@physics.org}
+\and University of Waterloo, 200 University Avenue West
+Waterloo, ON, Canada  N2L 3G1
+\url{https://uwaterloo.ca/}
+}
 %
 \maketitle              % typeset the header of the contribution
 %
@@ -81,8 +87,8 @@ a standardised approach to making that notebook. There are also
 many scientific workflow tools, such as Snakemake
 \cite{koster2012snakemake}, NextFlow \cite{di2017nextflow}, Kepler
 \cite{ludascher2006scientific} and Taverna \cite{hull2006taverna}. However, since
-these are workflow tools, the focus is on automation and
-repeatability rather than provenance, which, if it is included, is as an afterthought.
+these are workflow tools, the focus seems to be  on automation and
+repeatability rather than provenance, which, if it is included, seems not to be the primary purpose of the described tools. There are exceptions to this, such as the open provenance framework \cite{moreau2008open}, implemented in \cite{gadelha2011provenance} with yet another workflow control langauge \cite{zhao2007swift}, but such tools do not seem to have flourished and seemingly for agent-based models are non existent.
 
 One of the lessons learned from the replication exercise in
 \cite{polhill2017lessons} was that, for the purposes of replication, more
@@ -283,10 +289,19 @@ Using \texttt{SSREPI} for existing workflow scripts is a somewhat laborious task
 
 \section{Demonstration}
 
-Here, we demonstrate the use of \texttt{SSREPI} by repeating the experiment in the
-paper \cite{polhill2017lessons}, showing some of the workflow and provenance graphs, and then using fictitious examples to apply the workflow and provenance metadata to addressing issues in large-scale experiments. From a workflow perspective, the main result is that the
-principal diagrams in that paper were successfully recreated, with the same, albeit
-not identical, results. %right? % Plus, I've deleted all the whining :-)
+Here, we demonstrate the use of \texttt{SSREPI} by repeating the experiment in
+the paper \cite{polhill2017lessons}, showing some of the workflow and
+provenance graphs, and then using fictitious examples to apply the workflow and
+provenance metadata to addressing issues in large-scale experiments. From a
+workflow perspective, the main result is that the principal diagrams in that
+paper were successfully recreated, with the same, albeit not identical,
+results. %right? % Plus, I've deleted all the whining :-)
+% whoops the reviewer complained about there being nothing here, so I am going
+% to have to reintrouduce some of the whining. :)
+By this we mean that the diagrams produced for the original paper
+\cite{polhill2017lessons} were "roughly the same". They were not identical, but
+contained similar features close enough to illustrate the features that were originally reported on in the original research from
+\cite{polhill2017lessons}.
 
 After a run had completed successfully the database was run through several
 supplementary programs to produce the following visualisations of the provenance metadata recorded:
@@ -295,7 +310,7 @@ supplementary programs to produce the following visualisations of the provenance
             statistical and visualisation outputs.
 
         \item \textbf{Finegrain} - a provenance diagram down to the level of
-        variables.  \item \textbf{Folksonomomy} - a diagram showing annotations
+        variables.  \item \textbf{Folksonomy} - a diagram showing annotations
             against the database, produced and categorised at the discretion of
             the user doing the annotation \item \textbf{Project} - management
             metadata. Largest granularity of metadata supported \item
@@ -305,7 +320,7 @@ supplementary programs to produce the following visualisations of the provenance
 \end{itemize}
 
 The supplementary programs use the Dot language for input to Graphviz\cite{ellson2002graphviz}, producing the diagrams such as those in figures
-\ref{fig:sub-provenance}, \ref{fig:workflow}, \ref{fig:broken-application} and
+\ref{fig:workflow}, \ref{fig:sub-provenance}, \ref{fig:broken-application} and
 \ref{fig:high-lit-provenance-trace}. The workflow graph is in
 fig. \ref{fig:workflow}. The resultant provenance graph is massive, since there were 20,000 runs (so 20,000 sets of outputs to record), so we only show a \textit{very small} section of the provenance graph in fig.
 \ref{fig:sub-provenance}. 
@@ -321,8 +336,10 @@ fig. \ref{fig:workflow}. The resultant provenance graph is massive, since there 
 
 So what use is this provenance metadata? Imagine for the purposes of illustration that
 we have found a bug in a script. The entity {\color{red}\ttvar{Applications.application_3831436655}} is an experiment setup script \ttvar{SSS-StopC2-Cluster-create.pl}. We can use the workflow graph to see what else in the workflow might be affected. As might be expected for an experiment setup script, there are serious cascading consequences, which we can visualise in Figure \ref{fig:broken-application}. The Dot language used by Graphviz constitutes a primitive graph
-database. Indeed there are programs that can transform Dot files into
-TinkerPop GraphSON format \cite{tinkerpop2015graphson,gv2graphson}. To generate Figure \ref{fig:broken-application}, we used the workflow visualisation Dot file rather than the relational database. 
+database. Indeed there are programs that can transform Dot files into TinkerPop
+GraphSON format \cite{tinkerpop2015graphson,gv2graphson}, two reasonably well known and utilised graphing database formats. To generate Figure
+\ref{fig:broken-application}, we used the workflow visualisation Dot file
+rather than the relational database. 
 
 
 \begin{figure} \includegraphics[width=\textwidth]{img/broken-application.pdf}
@@ -383,6 +400,26 @@ Having done so, we are then in a position to fix the data file, and rerun only t
 
 \begin{figure} \includegraphics[width=\textwidth]{img/high-lit-provenance-trace.pdf}
 \caption{A provenance sub-graph showing (in red) the propagation of bad data through the system} \label{fig:high-lit-provenance-trace} \end{figure}
+
+\section{Discussion}
+
+It might seem that we are confusing random stream control and reproducibility
+of individual simulation runs, i.e., given a set of inputs and random stream
+that the simulation would always produce the same results, versus the
+reproducibility of an overall analysis that comes out of a calibration or other
+simulation workflow. However, the latter issues cannot even begin to be
+addressed until a reproducible and reliable workflow is implmented for agent based models -
+that is a directed acyclic graph from inputs to published outputs/visualisation
+and/or results. This may seem like a contradiction to our earlier claim that
+this is not a workflow tool, but workflow in agent-based models is complex and
+the link from data/model to published material for agent-based models is
+currently missing. Agent based modelling does not have any specialist needs in
+terms of work control other than magnitude on the number of inputs, number of
+runs and number of resuts. However step ups in magnitude are not always trivial
+as the step up petaflop to exaflop is demonstrates
+\cite{north2008agent}.
+
+
 
 \section{Future work}
 
