@@ -6,4 +6,6 @@ This contains a paper and a poster for SSC2023. I envisage eventually, receipts 
 
 + `paper` - the paper for the conference.
 + `poster` - the poster for the conference.
++ `presentation` - the presentation for the conference
++ `expenses` - the expenses for the conference
 + `README.md` - this file.
