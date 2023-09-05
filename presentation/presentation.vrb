@@ -1,0 +1,16 @@
+\frametitle{\color{red}\texttt{gpg:close}}
+
+    Closes and detaches the cryptogram. The file must have been successfully opened
+    using {\color{red}\texttt{gpg:open}}.  This means the data is no longer sitting in memory
+    encrypted.
+
+    If {\color{red}\texttt{cryptogram\_id}} is the variable holding the id of the attached and opened
+    cryptogram, then this command would be used in the following manner.
+
+    {\color{red}\begin{verbatim}
+    gpg:close cryptogram_id
+    \end{verbatim}}
+
+    This will exception if the {\color{red}\texttt{cryptogram\_id}} does not represent a cryptogram that
+    is attached and opened.
+

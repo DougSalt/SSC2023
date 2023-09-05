@@ -1,0 +1,13 @@
+digraph {
+rankdir=LR
+margin=0 ratio=fill
+"Applications.application_648609270" [color = red, fontcolor = red][label=<<U>Applications</U><BR/><B>SSS-StopC2-Cluster-expt.pl</B><BR/><BR/>created = 2022-12-20<BR/>creator = someone<BR/>id_application = application_648609270<BR/>purpose = Perl script to create the SSS<BR/>preliminary experiments. These<BR/>are designed to cover<BR/>sinks/nosinks and<BR/>RewardActivity/RewardSpecies,<BR/>at various BETs and ASPs, and<BR/>for flat and var2 market.<BR/>version = 1.0<BR/>licence = GPLv3<BR/>language = Perl>]
+"Applications.application_3831436655" [color = red, fontcolor = red][label=<<U>Applications</U><BR/><B>SSS-StopC2-Cluster-create.sh</B><BR/><BR/>created = 2022-12-20<BR/>creator = someone<BR/>modified = 2022-12-20<BR/>modifier = someone<BR/>id_application = application_3831436655<BR/>language = Bash>]
+"ContainerTypes._SSS_economystate" [color = red, fontcolor = red][label=<<U>ContainerTypes</U><BR/><B>_SSS_economystate</B><BR/><BR/>created = 2022-12-20<BR/>creator = someone<BR/>format = text/plain<BR/>identifier = name:______[^_]+_____.state>]
+"ContainerTypes._SSS_top-level-subpop" [color = red, fontcolor = red][label=<<U>ContainerTypes</U><BR/><B>_SSS_top-level-subpop</B><BR/><BR/>created = 2022-12-20<BR/>creator = someone<BR/>format = text/plain<BR/>identifier = <BR/>name:________[^_]+_[^_]+_[^_]+_.ssp>]
+"ContainerTypes._SSS_grid" [color = red, fontcolor = red][label=<<U>ContainerTypes</U><BR/><B>_SSS_grid</B><BR/><BR/>created = 2022-12-20<BR/>creator = someone<BR/>format = text/plain<BR/>identifier = name:___________[^_]+.grd>]
+"Applications.application_3831436655" -> "Applications.application_648609270" [color = red, fontcolor = red][label="dependency-to-dependency"]
+"Applications.application_648609270" -> "ContainerTypes._SSS_economystate" [color = red, fontcolor = red][label="product-to-container_type"]
+"Applications.application_648609270" -> "ContainerTypes._SSS_top-level-subpop" [color = red, fontcolor = red][label="product-to-container_type"]
+"Applications.application_648609270" -> "ContainerTypes._SSS_grid" [color = red, fontcolor = red][label="product-to-container_type"]
+}
